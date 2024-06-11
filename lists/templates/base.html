@@ -1,15 +1,79 @@
-<html>
-    <head>
-        <title>To-Do List</title>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
 
-    <body>
-        <h1>{% block header_text %}{% endblock %}</h1>
-        <form method="POST" action="{% block form_action %}{% endblock %}">
-            <input name="item_text" id="id_new_item" placeholder = "Enter a to-do item"/>
-            {% csrf_token %}
-        </form>
-        {% block table %}
-        {% endblock %}
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To-Do lists</title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* 靠顶部居中 */
+        }
+
+        .container {
+            max-width: 960px;
+            width: 100%;
+            padding: 0 15px;
+            margin-top: 50px; /* 从顶部留出一些空间 */
+        }
+
+        .jumbotron {
+            position: relative;
+            width: 100%;
+            text-align: center;
+            background-color: #3b5998; /* Facebook 蓝色 */
+            color: white; /* 白色字体 */
+        }
+
+        .jumbotron .production {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        #id_new_item {
+            text-align: center;
+            color: black; /* 输入框中的文字颜色为黑色 */
+        }
+
+        input::placeholder {
+            color: black; /* 输入框占位符文字颜色为黑色 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 jumbotron">
+                <div class="production">a PengAnkang production</div>
+                <div class="text-center">
+                    <h1>{% block header_text %}{% endblock %}</h1>
+                    <form method="POST" action="{% block form_action %}{% endblock %}">
+                        <input name="item_text" id="id_new_item" 
+                        class="form-control input-lg"
+                        placeholder="Enter a to-do item" />
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                {% block table %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>
