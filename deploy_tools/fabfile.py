@@ -38,7 +38,7 @@ def _update_settings(source_folder, site_name):
 	if not exists(secret_key_file):
 		chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 		key = ''.join(random.SystemRandom().choice(chars) for _ in range(50))
-		append(secret_key_file, f'SECRET_KEY = "{KEY}"')
+		append(secret_key_file, f'SECRET_KEY = "{key}"')
 	append(settings_path, '\nfrom .secret_key import SECRET_KEY')
 
 def _update_virtualenv(source_folder):
@@ -56,7 +56,7 @@ def _update_static_files(source_folder):
 def _update_database(source_folder):
 	run(
 		f'cd {source_folder}'
-		' && ../virtualenv/bin/python3 manage.py migrate --noinpuy'
+		' && ../virtualenv/bin/python3 manage.py migrate --noinput'
 		)
 	if __name__ == "__main__":
 		local('fab -f /path/fabfile.py deploy')
